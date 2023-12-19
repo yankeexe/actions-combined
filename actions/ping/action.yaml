@@ -1,0 +1,23 @@
+name: Ping URL
+description: ping tool
+
+inputs:
+  url:
+    required: true
+    description: URL to ping
+
+  count:
+    required: true
+    description: number of ping requests to send
+
+  interval:
+    required: false
+    default: "1"
+    description: interval for each ping request
+
+runs:
+  using: composite
+  steps:
+    - name: pinger
+      run: ping -i ${{ inputs.interval }} -c ${{ inputs.count }} ${{ inputs.url }}
+      shell: bash
